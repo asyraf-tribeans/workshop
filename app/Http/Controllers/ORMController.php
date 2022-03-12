@@ -16,8 +16,8 @@ class ORMController extends Controller
 
     public function students()
     {
-        // $students = Student::latest()->get();
-        // return response()->json($students);
+        $students = Student::latest()->get();
+        return response()->json($students);
 
         // $student = Student::find(3);
         // return response()->json($student->subjects);
@@ -43,7 +43,7 @@ class ORMController extends Controller
         $arr['code_subject'] = $subject->code_subject;
         $arr['exam_name'] = $subject->exam->name;
         foreach ($subject->exam->teachers as $teacher) {
-            $arr['teachers'][] = $teacher->name;
+            $arr['teachers'][] = ['teacher_name' => $teacher->name];
         }
         return response()->json($arr);
     }
